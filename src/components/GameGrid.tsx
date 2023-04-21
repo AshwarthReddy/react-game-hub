@@ -21,7 +21,7 @@ const GameGrid = () => {
       .get<GamesResponse>("/games")
       .then((response) => setGames(response.data.results))
       .catch((error) => setError(error.message));
-  });
+  }, []);
 
   return (
     <Center>
