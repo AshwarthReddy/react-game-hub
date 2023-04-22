@@ -25,19 +25,27 @@ const useGames = () => {
   const [games, setGames] = useState<Game[]>();
   const [error, setError] = useState<string>("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     let abortController = new AbortController();
+    setIsLoading(true);
     apiClient
       .get<GamesResponse>("/games", { signal: abortController.signal })
-      .then((response) => setGames(response.data.results))
+      .then((response) => {
+        setGames(response.data.results);
+        setIsLoading(false);
+      })
       .catch((error) => {
         if (error instanceof CanceledError) return;
         setError(error.message);
+        setIsLoading(false);
       });
+    //.finally(() => setIsLoading(false));
 
     return () => abortController.abort();
   }, []);
-  return { games, error };
+  return { games, error, isLoading };
 };
 
 export default useGames;
