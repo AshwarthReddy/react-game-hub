@@ -5,7 +5,7 @@ import GameGridSkeliton from "./GameGridSkeliton";
 import GameCardSkeliton from "./GameCardContainer";
 
 const GameGrid = () => {
-  const { games, error, isLoading } = useGames();
+  const { data, error, isLoading } = useGames();
 
   let skelitons = Array(12)
     .fill(null)
@@ -25,7 +25,7 @@ const GameGrid = () => {
               <GameGridSkeliton key={i} />
             </GameCardSkeliton>
           ))}
-        {games?.map((game) => (
+        {data?.map((game) => (
           <GameCardSkeliton>
             <GameCard key={game.id} game={game} />
           </GameCardSkeliton>
