@@ -2,27 +2,18 @@ import { useEffect, useState } from "react";
 import apiClient from "../apiClient";
 import { CanceledError } from "axios";
 
-export interface Platform {
+export interface Genre {
   id: number;
   name: string;
-  slug: string;
 }
 
-export interface Game {
-  id: number;
-  name: string;
-  background_image: string;
-  platforms: { platform: Platform }[];
-  metacritic: number;
-}
-
-interface GamesResponse {
+interface GenreResponse {
   count: number;
-  results: Game[];
+  results: Genre[];
 }
 
-const useGames = () => {
-  const [games, setGames] = useState<Game[]>();
+const useGenres = () => {
+  const [ganres, setGenres] = useState<Genre[]>();
   const [error, setError] = useState<string>("");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -31,22 +22,20 @@ const useGames = () => {
     let abortController = new AbortController();
     setIsLoading(true);
     apiClient
-      .get<GamesResponse>("/games", { signal: abortController.signal })
+      .get<GenreResponse>("/genres", { signal: abortController.signal })
       .then((response) => {
-        setGames(response.data.results);
-        setIsLoading(false);
+        setGenres(response.data.results);
       })
       .catch((error) => {
         if (error instanceof CanceledError) return;
         setError(error.message);
         setIsLoading(false);
-      });
-    // todo needs to be removed before deploy
-    //.finally(() => setIsLoading(false));
+      })
+      .finally(() => setIsLoading(false));
 
     return () => abortController.abort();
   }, []);
-  return { games, error, isLoading };
+  return { ganres, error, isLoading };
 };
 
-export default useGames;
+export default useGenres;
