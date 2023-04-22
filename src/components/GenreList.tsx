@@ -1,9 +1,12 @@
-import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
+import { HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
 import useGares from "../hooks/useGenres";
 import getCroppedImgaeUrl from "../imageUrlBuilder";
 
 const GenreList = () => {
-  const { data } = useGares();
+  const { data, error, isLoading } = useGares();
+  if (isLoading)
+    return <Spinner thickness="4px" speed="0.65s" color="red.500" />;
+  if (error) return null;
   return (
     <>
       <List>

@@ -20,13 +20,13 @@ const useData = <T>(endPoint: string) => {
       .get<GenreResponse<T>>(endPoint, { signal: abortController.signal })
       .then((response) => {
         setData(response.data.results);
+        setIsLoading(false);
       })
       .catch((error) => {
         if (error instanceof CanceledError) return;
         setError(error.message);
         setIsLoading(false);
-      })
-      .finally(() => setIsLoading(false));
+      });
 
     return () => abortController.abort();
   }, []);
