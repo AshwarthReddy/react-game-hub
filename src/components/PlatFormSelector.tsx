@@ -1,8 +1,13 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
+import { PaltForm } from "../hooks/usePlatForms";
 
-const PlatFormSelector = () => {
+interface Props {
+  selectedPlatForm: (platForm: PaltForm) => void;
+}
+
+const PlatFormSelector = ({ selectedPlatForm }: Props) => {
   const { data, error } = useGenres();
 
   if (error) return null;
@@ -13,7 +18,9 @@ const PlatFormSelector = () => {
       </MenuButton>
       <MenuList>
         {data?.map((i) => (
-          <MenuItem key={i.id}>{i.name}</MenuItem>
+          <MenuItem onClick={() => selectedPlatForm(i)} key={i.id}>
+            {i.name}
+          </MenuItem>
         ))}
       </MenuList>
     </Menu>

@@ -4,12 +4,14 @@ import GameCard from "./GameCard";
 import GameGridSkeliton from "./GameGridSkeliton";
 import GameCardSkeliton from "./GameCardContainer";
 import { Genre } from "../hooks/useGenres";
+import { PlatForm } from "../hooks/usePlatForms";
 
 interface Props {
   genre: Genre | null;
+  selectPlatForm: PlatForm | null;
 }
 
-const GameGrid = ({ genre }: Props) => {
+const GameGrid = ({ genre, selectPlatForm }: Props) => {
   const { data, error, isLoading } = useGames(genre);
 
   let skelitons = Array(12)
