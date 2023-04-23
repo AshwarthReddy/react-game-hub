@@ -11,9 +11,10 @@ import getCroppedImgaeUrl from "../imageUrlBuilder";
 
 interface Props {
   selectedGenre: (genre: Genre) => void;
+  genre: Genre | null;
 }
 
-const GenreList = ({ selectedGenre }: Props) => {
+const GenreList = ({ genre, selectedGenre }: Props) => {
   const { data, error, isLoading } = useGares();
   if (isLoading)
     return <Spinner thickness="4px" speed="0.65s" color="red.500" />;
@@ -21,20 +22,21 @@ const GenreList = ({ selectedGenre }: Props) => {
   return (
     <>
       <List>
-        {data?.map((genre) => (
-          <ListItem paddingY="1" key={genre.id}>
+        {data?.map((data) => (
+          <ListItem paddingY="1" key={data.id}>
             <HStack>
               <Image
                 boxSize="32px"
                 borderRadius={8}
-                src={getCroppedImgaeUrl(genre.image_background)}
+                src={getCroppedImgaeUrl(data.image_background)}
               />
               <Button
-                onClick={() => selectedGenre(genre)}
+                fontWeight={data.id === genre?.id ? "bold" : "normal"}
+                onClick={() => selectedGenre(data)}
                 fontSize="xl"
                 variant="link"
               >
-                {genre.name}
+                {data.name}
               </Button>
             </HStack>
           </ListItem>
