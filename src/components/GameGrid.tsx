@@ -7,12 +7,12 @@ import { Genre } from "../hooks/useGenres";
 import { PlatForm } from "../hooks/usePlatForms";
 
 interface Props {
-  genre: Genre | null;
+  selectedGenre: Genre | null;
   selectPlatForm: PlatForm | null;
 }
 
-const GameGrid = ({ genre, selectPlatForm }: Props) => {
-  const { data, error, isLoading } = useGames(genre);
+const GameGrid = ({ selectedGenre, selectPlatForm }: Props) => {
+  const { data, error, isLoading } = useGames(selectedGenre, selectPlatForm);
 
   let skelitons = Array(12)
     .fill(null)
