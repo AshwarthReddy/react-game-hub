@@ -3,16 +3,15 @@ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameGridSkeliton from "./GameGridSkeliton";
 import GameCardSkeliton from "./GameCardContainer";
-import { Genre } from "../hooks/useGenres";
-import { PlatForm } from "../hooks/usePlatForms";
+
+import { GameQuery } from "../App";
 
 interface Props {
-  selectedGenre: Genre | null;
-  selectPlatForm: PlatForm | null;
+  gameQuery: GameQuery;
 }
 
-const GameGrid = ({ selectedGenre, selectPlatForm }: Props) => {
-  const { data, error, isLoading } = useGames(selectedGenre, selectPlatForm);
+const GameGrid = ({ gameQuery }: Props) => {
+  const { data, error, isLoading } = useGames(gameQuery);
 
   let skelitons = Array(12)
     .fill(null)

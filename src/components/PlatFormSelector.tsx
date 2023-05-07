@@ -1,10 +1,10 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
-import { PaltForm, PlatForm } from "../hooks/usePlatForms";
+import { PlatForm } from "../hooks/usePlatForms";
 
 interface Props {
-  selectedPlatForm: (platForm: PaltForm) => void;
+  selectedPlatForm: (platForm: PlatForm) => void;
   platForm: PlatForm | null;
 }
 
