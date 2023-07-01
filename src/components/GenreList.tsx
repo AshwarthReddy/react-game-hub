@@ -28,6 +28,7 @@ const GenreList = ({ genre, selectedGenre }: Props) => {
               <Image
                 boxSize="32px"
                 borderRadius={8}
+                objectFit='cover'
                 src={getCroppedImgaeUrl(data.image_background)}
               />
               <Button
@@ -35,6 +36,8 @@ const GenreList = ({ genre, selectedGenre }: Props) => {
                 onClick={() => selectedGenre(data)}
                 fontSize="xl"
                 variant="link"
+                whiteSpace='normal'
+                textAlign='left'
               >
                 {data.name}
               </Button>
